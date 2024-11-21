@@ -1,0 +1,12 @@
+[Unit]
+Description=Albot, an IRC bot by MrOrange
+Documentation=https://github.com/qspidy/albot
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /etc/albot/main.py
+WorkingDirectory=/etc/albot
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

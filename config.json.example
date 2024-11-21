@@ -1,0 +1,14 @@
+{
+  "host": "znc.example",
+  "port": 6697,
+  "nick": "albot",
+  "user": "albot/net",
+  "password": "mypassword",
+  "channels": ["#channel1", "#channel2"],
+  "yutto_server": "localhost:8080",
+  "bilibili_flags": ["bilibili"],
+  "model": "llama3",
+  "ollama_host": "127.0.0.1",
+  "ollama_port": 11434,
+  "log_file": "albot.log"
+}
