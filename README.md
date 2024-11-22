@@ -4,6 +4,8 @@
 
 ![](assets/albot_demo.gif)
 
+Visit [My Blog](https://orange.wastaken.xyz/2024/11/22/Implementing-An-Simple-IRC-Bot-Using-Python/) to learn about Albot more.
+
 ## Capabilities
 
 * **Act as AI**: Utilize `ollama` in backend for AI-driven responses.
