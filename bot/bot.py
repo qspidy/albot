@@ -46,6 +46,7 @@ class IRCBot:
         time.sleep(1)
         while True:
             self.logger.info("check_inactivity")
+            self.logger.info(f"curtime:{time.time()}, last_activity:{self.last_activity}")
             if time.time() - self.last_activity > self.INACTIVITY_LIMIT:
                 self.logger.warning("No activity detected. Reconnecting...")
                 self.reconnect()
@@ -251,9 +252,10 @@ class IRCBot:
             try:
                 response = self.sock.recv(2048).decode("utf-8").strip()
             except Exception as e:
+                self.logger.error("recv from sock error")
                 continue
-            self.last_activity = time.time()
             if response:
+                self.last_activity = time.time()
                 self.logger.info(response)
 
             # Server keep alive
