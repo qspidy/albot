@@ -54,15 +54,21 @@ class IRCBot:
 
     def reconnect(self):
         if self.sock:
+            self.logger.warning("closing sock")
             self.sock.close()
+        self.logger.warning("connecting sock")
+
         self.connect()
 
     def connect(self):
         try:
+            self.logger.info("connecting...")
             context = ssl.create_default_context()
             raw_socket = socket.create_connection((self.host, self.port))
             self.sock = context.wrap_socket(raw_socket, server_hostname=self.host)
+            self.sock.settimeout(300)
 
+            self.logger.info("connect success")
             self.sock.send(f"PASS {self.password}\n".encode("utf-8"))
             self.sock.send(f"NICK {self.nick}\n".encode("utf-8"))
             self.sock.send(f"USER {self.user} 0 * :Albot\n".encode("utf-8"))
@@ -252,7 +258,8 @@ class IRCBot:
             try:
                 response = self.sock.recv(2048).decode("utf-8").strip()
             except Exception as e:
-                self.logger.error("recv from sock error")
+                #self.logger.error("recv from sock error")
+                time.sleep(5)
                 continue
             if response:
                 self.last_activity = time.time()
@@ -268,4 +275,5 @@ class IRCBot:
 
             if "PRIVMSG" in response:
                 self.in_message_queue.put(response)
+
 
